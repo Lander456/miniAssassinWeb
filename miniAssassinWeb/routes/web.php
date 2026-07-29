@@ -56,3 +56,7 @@ Route::post('/admin/codes', [CodeController::class, 'uploadCode']);
 
 Route::delete('/admin/codes/{code}', [CodeController::class, 'destroy'])->middleware('admin');
 Route::delete('/admin/players/{player}', [PlayerController::class, 'destroy'])->middleware('admin');
+
+Route::get('/pravidla', function () {
+    return Inertia::render('rules');
+});
