@@ -190,7 +190,7 @@ export default function Rules() {
                                             herní prostor.
                                         </p>
                                         <p>
-                                            Po uběhnutí 15 minut od úmrtí hráče
+                                            Po uběhnutí 10 minut od úmrtí hráče
                                             je hráč oživen, může znovu vraždit,
                                             být zavražděn a plnit úkoly.
                                         </p>

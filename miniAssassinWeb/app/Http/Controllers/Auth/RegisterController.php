@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Player;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -28,6 +30,10 @@ class RegisterController extends Controller
         $imageData = null;
         $imageMime = null;
 
+        do {
+            $codice = strtoupper(Str::random(8));
+        } while (Player::where('codice', $codice)->exists());
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $imageData = base64_encode(file_get_contents($file->getRealPath()));
@@ -35,7 +41,7 @@ class RegisterController extends Controller
         }
 
         $user->player()->create([
-            'codice' => substr(Hash::make($user->name . $user->email), 0, 8),
+            'codice' => $codice,
             'image_data' => $imageData,
             'image_mime' => $imageMime,
             'points' => 100,
