@@ -27,7 +27,7 @@ export function AppSidebar() {
     const user: User = auth.user
     const { setOpen } = useSidebar();
 
-    const isPlayer = user?.is_player ?? false;
+    const isPlayer = !!user?.player;
     const deadUntil = user?.player?.deadUntil;
     const isDead = isPlayer && deadUntil && new Date(deadUntil) > new Date();
     const isAdmin = user?.is_admin ?? false;
@@ -127,7 +127,9 @@ export function AppSidebar() {
     const [isUploadOpen, setIsUploadOpen] = useState(false);
 
     useEffect(() => {
-        if (!user) setOpen(false);
+        if (!user) {
+            setOpen(false);
+        }
     }, [user, setOpen]);
 
     return (

@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'codice' => substr(Hash::make($user->name . $user->email), 0, 8),
             'image_data' => $imageData,
             'image_mime' => $imageMime,
-            'points' => 1000,
+            'points' => 100,
         ]);
 
         Auth::login($user);

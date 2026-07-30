@@ -8,17 +8,12 @@ export function AppSidebarHeader({
 }: {
     breadcrumbs?: BreadcrumbItemType[];
 }) {
-    const { auth, global } = usePage().props as {
-        auth: { user: User | null };
-        global: { startTime: string };
-    };
+    const { auth, gameStarted } = usePage().props;
 
     const user = auth.user;
     const isAdmin = user?.is_admin ?? false;
 
-    const gameHasStarted = global?.startTime
-        ? new Date(global.startTime).getTime() <= new Date().getTime()
-        : false;
+    const gameHasStarted = gameStarted;
 
     const showSidebarTrigger = user && (isAdmin || gameHasStarted)
 
