@@ -183,7 +183,7 @@ export default function Rules() {
                                     <p className="mb-3 leading-relaxed text-gray-600">
                                         <p>Smrtí pro hráče hra nekončí.</p>
                                         <p>
-                                            Pokud je hráč zabit, na 15 minut je
+                                            Pokud je hráč zabit, na 10 minut je
                                             mu odepřena možnost zabíjet, být
                                             zabit a plnit úkoly, v tomto čase se
                                             ovšem může volně pohybovat skrze
