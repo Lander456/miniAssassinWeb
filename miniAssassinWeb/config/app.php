@@ -123,6 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'game_start_time' => env('GAME_START_TIME'),
+    'game_started' => env('GAME_STARTED'),
+    'death_timer' => env('DEATH_TIMER')
 
 ];

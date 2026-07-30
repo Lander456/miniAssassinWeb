@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Code;
+use App\Models\Player;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -51,7 +52,9 @@ class HandleInertiaRequests extends Middleware
             'global' => [
                 'startTime' => config('app.game_start_time'),
             ],
-            'codes' => $request->user() ? Code::select('id', 'name', 'image_path', 'active')->get()->map(function ($code) {
+            'playerCount' => Player::count(),
+            'gameStarted' => config('app.game_started', false),
+            'codes' => $request->user() ? Code::select('id', 'name', 'active')->get()->map(function ($code) {
                 return [
                     'id' => $code->id,
                     'name' => $code->name,

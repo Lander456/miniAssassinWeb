@@ -41,7 +41,7 @@ export default function Register({ passwordRules }: Props) {
             <form onSubmit={submit} className="flex flex-col gap-6">
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">Celé jméno</Label>
                         <Input
                             id="name"
                             type="text"
@@ -58,7 +58,7 @@ export default function Register({ passwordRules }: Props) {
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+                        <Label htmlFor="email">Email</Label>
                         <Input
                             id="email"
                             type="email"
@@ -74,7 +74,7 @@ export default function Register({ passwordRules }: Props) {
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Heslo</Label>
                         <PasswordInput
                             id="password"
                             required
@@ -93,7 +93,7 @@ export default function Register({ passwordRules }: Props) {
 
                     <div className="grid gap-2">
                         <Label htmlFor="password_confirmation">
-                            Confirm password
+                            Potvrzení hesla
                         </Label>
                         <PasswordInput
                             id="password_confirmation"
@@ -112,7 +112,7 @@ export default function Register({ passwordRules }: Props) {
                     </div>
 
                     <div>
-                        <Label htmlFor="image">Fotka</Label>
+                        <Label htmlFor="image">Fotka Vašeho obličeje</Label>
                         <Input
                             id="image"
                             type="file"
@@ -137,7 +137,7 @@ export default function Register({ passwordRules }: Props) {
                 </div>
 
                 <div className="text-center text-sm text-muted-foreground">
-                    Already have an account?{' '}
+                    Už máte účet?{' '}
                     <TextLink href="/login" tabIndex={6}>
                         Log in
                     </TextLink>

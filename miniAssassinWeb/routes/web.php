@@ -10,8 +10,6 @@ use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Middleware\EnsureGameHasStarted;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
-use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 Route::get('/overview', function () {
     return Inertia::render('overview', [
@@ -28,13 +26,12 @@ Route::middleware([EnsureGameHasStarted::class])->group(function () {
 
         Route::post('/kill', [PlayerController::class, 'kill']);
         Route::post('/code', [CodeController::class, 'submitCode']);
-
-        Route::post('/logout', LogoutController::class)->name('logout');
     });
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/account', [ProfileController::class, 'destroy']);
+    Route::post('/logout', LogoutController::class)->name('logout');
 });
 
 require __DIR__.'/settings.php';
@@ -60,3 +57,6 @@ Route::delete('/admin/players/{player}', [PlayerController::class, 'destroy'])->
 Route::get('/pravidla', function () {
     return Inertia::render('rules');
 });
+
+Route::post('/profile/image', [PlayerController::class, 'updateImage']);
+Route::post('/admin/players/{player}/image', [PlayerController::class, 'forcedUpdateImage'])->middleware('admin');

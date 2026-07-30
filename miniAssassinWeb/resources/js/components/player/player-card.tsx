@@ -1,5 +1,6 @@
 import { router, useForm, usePage } from '@inertiajs/react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useRef } from 'react';
 
 export interface Player {
     id: number;
@@ -39,7 +40,38 @@ export default function PlayerCard({ player }: PlayerCardProps) {
         }
     };
 
-    console.log(player);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleImageClick = () => {
+        if (isAdmin) {
+            fileInputRef.current?.click();
+        }
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            return;
+        }
+
+        const file = e.target.files[0];
+
+        if (file instanceof File) {
+            router.post(`/admin/players/${player.id}/image`, {
+                image: file,
+            }, {
+                forceFormData: true,
+                preserveScroll: true,
+                onError: (errors) => {
+                    alert('Chyba behem nahravani fotky :(.' + (errors.image || 'welp...'));
+                },
+                onSuccess: () => {
+                    if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
+                    }
+                }
+            });
+        }
+    }
 
     return (
         <div
@@ -60,15 +92,44 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                         </DialogTitle>
                     </DialogHeader>
                     <div className="flex justify-center p-4">
-                        {player.image_data_uri ? (
-                            <img
-                                src={player.image_data_uri}
-                                alt={`Fotka hráče ${player.name}`}
-                                className="max-h-[50vh] w-auto rounded-md object-contain shadow-lg"
-                            />
-                        ) : (
-                            <p className="text-gray-400">Uhhhh... :(((</p>
-                        )}
+                        <div
+                            className={`relative flex justify-center overflow-hidden rounded-md ${isAdmin ? 'group cursor-pointer' : ''}`}
+                            onClick={handleImageClick}
+                        >
+                            {player.image_data_uri ? (
+                                <img
+                                    src={player.image_data_uri}
+                                    alt={`Fotka hráče ${player.name}`}
+                                    className={`max-h-[50vh] w-auto rounded-md object-contain shadow-lg transition duration-200 ${isAdmin ? 'group-hover:opacity-30 group-hover:blur-sm' : ''}`}
+                                />
+                            ) : (
+                                <div
+                                    className={`flex h-48 w-48 items-center justify-center rounded-md bg-gray-800 text-gray-400 transition duration-200 ${isAdmin ? 'group-hover:bg-gray-700' : ''}`}
+                                >
+                                    Uhhhh... :(((
+                                </div>
+                            )}
+
+                            {/* Zobrazí se jen adminovi při najetí myší */}
+                            {isAdmin && (
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                                    <span className="rounded bg-black/80 px-3 py-1.5 text-sm font-semibold text-white shadow-md">
+                                        Změnit fotku
+                                    </span>
+                                </div>
+                            )}
+
+                            {/* Skrytý input */}
+                            {isAdmin && (
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                />
+                            )}
+                        </div>
                     </div>
                 </DialogContent>
             </Dialog>

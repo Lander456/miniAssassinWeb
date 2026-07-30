@@ -184,10 +184,6 @@ export function AppSidebar() {
                                         <DialogTrigger asChild>
                                             <button className="w-full text-left rounded-md bg-sidebar-accent hover:bg-sidebar-accent/80 transition-colors px-3 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 flex items-center justify-between">
                                                 <span className={!item.active ? 'line-through text-gray-500' : ''}>{item.name}</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
-                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                                                    <circle cx="12" r="3"/>
-                                                </svg>
                                             </button>
                                         </DialogTrigger>
                                         <DialogContent className="max-w-3xl bg-gray-900 border-gray-700">

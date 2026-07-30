@@ -20,12 +20,10 @@ class EnsureGameHasStarted
             return $next($request);
         }
 
-        $startTime = Carbon::parse(config('app.game_start_time'));
-
-        if (now()->isBefore($startTime)) {
-            return redirect()->route('overview');
+        if (config('app.game_started')) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect()->route('overview');
     }
 }
