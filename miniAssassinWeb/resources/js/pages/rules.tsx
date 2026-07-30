@@ -67,7 +67,7 @@ export default function Rules() {
                                             města Brna a parku v okolí hradu
                                             Špilberk. Centrem města Brna se
                                             rozumí území obkroužené šalinovou
-                                            (snad nejsu z Práglu, ne?) dráhou.
+                                            dráhou.
                                         </p>
                                         <p>
                                             Hra bude probíhat v pátek 7.8. 2026
