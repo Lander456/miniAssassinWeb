@@ -63,4 +63,19 @@ class ProfileController extends Controller
 
         return redirect('/');
     }
+
+    public function updateName(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $request->user()->fill([
+            'name' => $validated['name'],
+        ]);
+
+        $request->user()->save();
+
+        return back();
+    }
 }

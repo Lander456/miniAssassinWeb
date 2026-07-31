@@ -60,3 +60,5 @@ Route::get('/pravidla', function () {
 
 Route::post('/profile/image', [PlayerController::class, 'updateImage']);
 Route::post('/admin/players/{player}/image', [PlayerController::class, 'forcedUpdateImage'])->middleware('admin');
+
+Route::patch('/profile/name', [ProfileController::class, 'updateName'])->name('profile.name.update');

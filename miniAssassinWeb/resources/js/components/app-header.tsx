@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
     Dialog,
     DialogClose,
@@ -13,6 +13,10 @@ import { login, register } from '@/routes';
 export function AppHeader() {
     const page = usePage();
     const { auth, playerCount, gameStarted } = page.props;
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [editNameValue, setEditNameValue] = useState(auth.user?.name || '');
+    const [isSavingName, setIsSavingName] = useState(false);
+
 
     const handleDeleteAccount = () => {
         if (confirm('Opravdu chceš svůj účet smazat a tím se odhlásit ze hry? Tato akce je nvratná!')) {
@@ -51,6 +55,24 @@ export function AppHeader() {
             })
         }
     }
+
+    const handleNameSave = () => {
+        if (!editNameValue.trim() || editNameValue === auth.user?.name) {
+            setIsEditingName(false);
+
+            return;
+        }
+
+        setIsSavingName(true);
+
+        router.patch('/profile/name', {
+            name: editNameValue
+        }, {
+            preserveScroll: true,
+            onSuccess: () => setIsEditingName(false),
+            onFinish: () => setIsSavingName(false),
+        });
+    };
 
     return (
         <div className="border-b border-sidebar-border/80 bg-white">
@@ -112,10 +134,68 @@ export function AppHeader() {
                                                     </div>
                                                 </div>
 
-                                                <div className="text-center">
-                                                    <h3 className="text-lg font-bold">
-                                                        {auth.user.name}
-                                                    </h3>
+                                                <div className="text-center w-full min-h-[40px] flex items-center justify-center">
+                                                    {isEditingName ? (
+                                                        <div className="flex flex-wrap items-center gap-2">
+                                                            <input
+                                                                type="text"
+                                                                value={editNameValue}
+                                                                onChange={(e) => setEditNameValue(e.target.value)}
+                                                                onKeyDown={(e) => {
+                                                                    if (e.key === 'Enter') {
+                                                                        handleNameSave();
+                                                                    }
+
+                                                                    if (e.key === 'Escape') {
+                                                                        setIsEditingName(false);
+                                                                    }
+                                                                }}
+                                                                disabled={isSavingName}
+                                                                className="w-40 rounded border bg-gray-800 px-3 py-1.5 text-center font-bold text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                                                                autoFocus
+                                                            />
+                                                            <button
+                                                                onClick={handleNameSave}
+                                                                disabled={isSavingName}
+                                                                className="rounded bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-500 disabled:opacity-50"
+                                                            >
+                                                                Uložit
+                                                            </button>
+                                                            <button
+                                                                onClick={() => setIsEditingName(false)}
+                                                                disabled={isSavingName}
+                                                                className="rounded bg-gray-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-600 disabled:opacity-50"
+                                                            >
+                                                                Zrušit
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <div
+                                                            className="group flex cursor-pointer items-center gap-2 rounded px-3 py-1 transition-colors hover:bg-gray-800"
+                                                            onClick={() => {
+                                                                setEditNameValue(auth.user.name);
+                                                                setIsEditingName(true);
+                                                            }}
+                                                        >
+                                                            <h3>
+                                                                {auth.user.name}
+                                                            </h3>
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="16"
+                                                                height="16"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                stroke="currentColor"
+                                                                strokeWidth="2"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                className="text-gray-400 opacity-60 sm:opacity-0 transition-opacity sm:group-hover:opacity-100"
+                                                            >
+                                                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                                                            </svg>
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <div className="w-full rounded-md border border-gray-700 bg-gray-800 p-4 text-center shadow-inner">
                                                     <p className="mb-1 text-sm text-gray-400">

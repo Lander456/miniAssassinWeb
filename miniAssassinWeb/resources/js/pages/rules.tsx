@@ -229,6 +229,23 @@ export default function Rules() {
                                         </p>
                                     </p>
                                 </div>
+                                <div>
+                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                        5. Metaotázky a jejich odpovědi
+                                    </h2>
+                                    <p className="mb-3 leading-relaxed text-gray-600">
+                                        <p>
+                                            Pokud je hráč dotázán, zda se účastní
+                                            miniassassina, jeho odpověď musí být
+                                            pravdivá.
+                                        </p>
+                                        <p>
+                                            Pokud je hráč dotázán na svůj status
+                                            v rámci hry (živý, či mrtvý), taktéž
+                                            musí odpovědět pravdivě.
+                                        </p>
+                                    </p>
+                                </div>
                             </section>
                         </div>
                     </div>
