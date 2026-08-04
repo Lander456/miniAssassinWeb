@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/overview', function () {
-    return Inertia::render('overview', [
-        'startTime' => config('app.game_start_time'),
-    ]);
+
+    if (config('app.game_started')) {
+        return redirect()->route('leaderboard');
+    }
+
+    return Inertia::render('overview');
 })->name('overview');
 
 Route::middleware([EnsureGameHasStarted::class])->group(function () {

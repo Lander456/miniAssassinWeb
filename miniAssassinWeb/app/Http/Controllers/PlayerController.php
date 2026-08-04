@@ -92,8 +92,8 @@ class PlayerController extends Controller
 
         $killer = $request->user()->player;
 
-        $pointsTaken = 100;
-        $pointsGiven = 200;
+        $pointsTaken = round(abs(($killer->points - $killedPlayer->points) / Player::sum('points')) * (1/6) * $killedPlayer->points);
+        $pointsGiven = $pointsTaken + 200;
 
         $killedPlayer->update(['points' => $killedPlayer->points - $pointsTaken]);
         if ($killedPlayer->points < 0) {

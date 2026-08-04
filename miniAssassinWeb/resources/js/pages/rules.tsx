@@ -33,8 +33,8 @@ export default function Rules() {
                                             V miniAssassinu každý hráč
                                             reprezentuje jednoho aktéra v
                                             Brněnském podsvětí pracujícího pro
-                                            všudypřítomnou, téměř omnipotentní
-                                            společnost Geologica Siciliana.
+                                            novopečenou společnost Aeronautica
+                                            Fenomenale.
                                             Cílem každého hráče je akumulovat
                                             skrz dobu trvání hry co nejvíce
                                             bodů. Tyto body může získávat za
