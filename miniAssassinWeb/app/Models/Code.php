@@ -13,6 +13,7 @@ class Code extends Model
     protected $fillable = [
         'points',
         'name',
+        'description',
         'codice',
         'active',
         'image_data',

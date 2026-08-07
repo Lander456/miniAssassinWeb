@@ -1,5 +1,4 @@
 import { router, useForm, usePage } from '@inertiajs/react';
-
 import { useEffect, useState } from 'react';
 import { DeathTimer } from '@/components/death-timer'
 import { Button } from '@/components/ui/button';
@@ -15,6 +14,7 @@ import type { User } from '@/types';
 interface CodeItem {
     id: number;
     name: string;
+    description?: string | null;
     image_data_uri: string | null;
     active: boolean;
 }
@@ -86,10 +86,11 @@ export function AppSidebar() {
     } = useForm({
         name: '',
         points: '',
-        image: null
+        description: '',
+        image: null as File | null
     });
 
-    const handleKillSubmit = (e: { preventDefault: () => void }) => {
+    const handleKillSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         postKill('/kill', {
@@ -98,7 +99,7 @@ export function AppSidebar() {
         });
     };
 
-    const handleCodeSubmit = (e: { preventDefault: () => void }) => {
+    const handleCodeSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         postCode('/code', {
             onSuccess: () => resetCode('code'),
@@ -117,7 +118,7 @@ export function AppSidebar() {
     };
 
     const handleDeleteCode = (id: number) => {
-        if (confirm('Urůčitě chceš kódík smazat?')) {
+        if (confirm('Určitě chceš kódík smazat?')) {
             router.delete(`/admin/codes/${id}`, {
                 preserveScroll: true,
             });
@@ -137,10 +138,11 @@ export function AppSidebar() {
             <SidebarContent>
                 {isDead ? (
                     <DeathTimer deadUntil={deadUntil} />
-                    ) : (
+                ) : (
                     <>
                         <form
                             onSubmit={handleKillSubmit}
+                            className="flex flex-col gap-2 p-2"
                         >
                             <Label htmlFor="kill">Kill:</Label>
                             <Input
@@ -154,10 +156,10 @@ export function AppSidebar() {
                                 type="submit"
                                 disabled={processingKill}
                             >
-                                {processingKill ? 'Sending=...' : 'Zadat Kill'}
+                                {processingKill ? 'Sending...' : 'Zadat Kill'}
                             </Button>
                         </form>
-                        <form onSubmit={handleCodeSubmit} className="flex flex-col gap-2">
+                        {/*<form onSubmit={handleCodeSubmit} className="flex flex-col gap-2 p-2">
                             <Label htmlFor="code">Code:</Label>
                             <Input
                                 id="code"
@@ -170,10 +172,10 @@ export function AppSidebar() {
                             <Button type="submit" disabled={processingCode}>
                                 {processingCode ? 'Sending...' : 'Zadat Kodik'}
                             </Button>
-                        </form>
+                        </form>*/}
                     </>
-                    )}
-                <div className="mt-4 border-t border-sidebar-border pt-4">
+                )}
+                <div className="mt-4 border-t border-sidebar-border pt-4 px-2">
                     <h3 className="mb-3 text-sm font-semibold text-gray-500 uppercase tracking-wider">
                         Kodicky :)
                     </h3>
@@ -192,12 +194,21 @@ export function AppSidebar() {
                                             <DialogHeader>
                                                 <DialogTitle className="text-white text-xl">{item.name}</DialogTitle>
                                             </DialogHeader>
-                                            <div className="flex justify-center p-4">
+                                            <div className="flex flex-col items-center p-4 gap-4">
+
+                                                {item.description && (
+                                                    <div className="w-full bg-gray-800 rounded-md p-4 text-left border border-gray-700">
+                                                        <p className="text-gray-200 whitespace-pre-wrap text-sm">
+                                                            {item.description}
+                                                        </p>
+                                                    </div>
+                                                )}
+
                                                 {item.image_data_uri ? (
                                                     <img
                                                         src={item.image_data_uri}
                                                         alt={`Cifra pro ${item.name}`}
-                                                        className="max-h-[70vh] w-auto rounded-md object-contain"
+                                                        className="max-h-[60vh] w-auto rounded-md object-contain"
                                                     />
                                                 ) : (
                                                     <p className="text-gray-400">Cifra ztracena :(</p>
@@ -226,7 +237,7 @@ export function AppSidebar() {
                     )}
                 </div>
                 {isAdmin && (
-                    <div className="mt-4 pt-4 border-t border-sidebar-border">
+                    <div className="mt-4 pt-4 border-t border-sidebar-border px-2 pb-4">
                         <Dialog open={isUploadOpen} onOpenChange={setIsUploadOpen}>
                             <DialogTrigger asChild>
                                 <Button className="w-full bg-green-600 hover:bg-green-700 text-white shadow-md">
@@ -245,7 +256,7 @@ export function AppSidebar() {
                                                 value={uploadData.name}
                                                 onChange={e => setUploadData('name', e.target.value)}
                                                 required
-                                                className="bg-gray-800 border-gray-700"
+                                                className="bg-gray-800 border-gray-700 mt-1"
                                             />
                                             {uploadErrors.name && <span className="text-red-500 text-sm">{uploadErrors.name}</span>}
                                         </div>
@@ -256,10 +267,21 @@ export function AppSidebar() {
                                                 value={uploadData.points}
                                                 onChange={e => setUploadData('points', e.target.value)}
                                                 required
-                                                className="bg-gray-800 border-gray-700"
+                                                className="bg-gray-800 border-gray-700 mt-1"
                                             />
                                             {uploadErrors.points && <span className="text-red-500 text-sm">{uploadErrors.points}</span>}
                                         </div>
+
+                                        <div>
+                                            <Label>Popis cifry</Label>
+                                            <textarea
+                                                value={uploadData.description}
+                                                onChange={e => setUploadData('description', e.target.value)}
+                                                className="flex min-h-[80px] w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1 placeholder:text-gray-500"
+                                            />
+                                            {uploadErrors.description && <span className="text-red-500 text-sm">{uploadErrors.description}</span>}
+                                        </div>
+
                                         <div>
                                             <Label>Obsah cifry (PNG/JPG)</Label>
                                             <Input
@@ -269,7 +291,7 @@ export function AppSidebar() {
                                                     setUploadData('image', e.target.files ? e.target.files[0] : null)
                                                 }
                                                 required
-                                                className="bg-gray-800 border-gray-700 cursor-pointer file:text-white"
+                                                className="bg-gray-800 border-gray-700 cursor-pointer file:text-white mt-1"
                                             />
                                             {uploadErrors.image && <span className="text-red-500 text-sm">{uploadErrors.image}</span>}
                                         </div>

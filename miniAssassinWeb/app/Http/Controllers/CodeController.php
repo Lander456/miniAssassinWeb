@@ -99,6 +99,7 @@ class CodeController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:codes,name',
+            'description' => 'string|max:255|nullable',
             'points' => 'required|numeric|min:0',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
         ]);
@@ -111,6 +112,7 @@ class CodeController extends Controller
         Code::create([
             'name' => $validated['name'],
             'points' => $validated['points'],
+            'description' => $validated['description'],
             'codice' => $codice,
             'image_data' => $base64Image,
             'image_mime' => $file->getClientMimeType(),
