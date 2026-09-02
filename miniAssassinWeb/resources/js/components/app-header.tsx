@@ -9,6 +9,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { login, register } from '@/routes';
+import logoImage from '../../images/logo2.png'
 
 export function AppHeader() {
     const page = usePage();
@@ -75,29 +76,39 @@ export function AppHeader() {
     };
 
     return (
-        <div className="border-b border-sidebar-border/80 bg-white">
+        <div className="border-b border-brand-secondary bg-brand-primary">
             <div className="mx-auto flex h-16 items-center justify-between px-2 sm:px-4 md:max-w-7xl">
-                <div className="font-bold text-gray-800 text-sm sm:text-base">
-                    <Link href="/">miniAssassin</Link>
+                <div className="text-md font-bold text-brand-secondary md:text-base">
+                    <Link
+                        href="/"
+                        className="flex flex-row items-center gap-2 transition-opacity hover:opacity-80"
+                    >
+                        <img
+                            src={logoImage}
+                            alt="Logo společnosti"
+                            className="h-20 w-20 object-contain"
+                        />
+                        miniAssassin
+                    </Link>
                 </div>
                 <div className="flex items-center gap-4 text-sm">
                     {!gameStarted && playerCount !== undefined && (
-                        <span className="rounded-full bg-blue-100 px-3 py-1 text-[10px] sm:text-xs font-semibold text-blue-800">
+                        <span className="rounded-full bg-blue-100 px-3 py-1 text-[10px] font-semibold text-blue-800 sm:text-xs">
                             Počet hráčů: {playerCount}
                         </span>
                     )}
 
-                    <div className="flex items-center gap-2 sm:gap-4 font-medium text-gray-700">
+                    <div className="flex items-center gap-2 font-medium text-gray-700 sm:gap-4">
                         {auth.user ? (
                             <>
-                                <div className="flex items-center gap-1 sm:gap-2 font-medium text-gray-700">
+                                <div className="flex items-center gap-1 font-medium text-gray-700 sm:gap-2">
                                     <Dialog>
                                         <DialogTrigger asChild>
-                                            <button className="max-w-[80px] sm:max-w-[150px] truncate underline-offset-4 transition-colors hover:text-blue-600 hover:underline text-left">
+                                            <button className="max-w-[80px] truncate text-left underline-offset-4 transition-colors text-brand-secondary hover:text-brand-secondary-sat hover:underline sm:max-w-[150px]">
                                                 {auth.user.name}
                                             </button>
                                         </DialogTrigger>
-                                        <DialogContent className="w-[95vw] max-w-sm max-h-[90vh] overflow-y-auto border-gray-700 bg-gray-900 text-white rounded-lg">
+                                        <DialogContent className="max-h-[90vh] w-[95vw] max-w-sm overflow-y-auto rounded-lg border-brand-secondary bg-brand-primary text-brand-secondary">
                                             <DialogHeader>
                                                 <DialogTitle className="text-center text-xl">
                                                     Tvůj profil
@@ -110,12 +121,9 @@ export function AppHeader() {
                                                     onClick={handleImageClick}
                                                 >
                                                     {auth.user?.player
-                                                        ?.image_data_uri ? (
+                                                        ?.image_path ? (
                                                         <img
-                                                            src={
-                                                                auth.user.player
-                                                                    .image_data_uri
-                                                            }
+                                                            src={`/storage/${auth.user.player.image_path}`}
                                                             alt={
                                                                 'uhhhhh.................'
                                                             }
@@ -128,42 +136,71 @@ export function AppHeader() {
                                                     )}
 
                                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                                                        <span className="rounded bg-black/80 px-3 py-1.5 text-sm font-semibold text-white shadow-md">
+                                                        <span className="rounded bg-black/80 px-3 py-1.5 text-sm font-semibold text-brand-secondary shadow-md">
                                                             Změnit fotku
                                                         </span>
                                                     </div>
                                                 </div>
 
-                                                <div className="text-center w-full min-h-[40px] flex items-center justify-center">
+                                                <div className="flex min-h-[40px] w-full items-center justify-center text-center">
                                                     {isEditingName ? (
                                                         <div className="flex flex-wrap items-center gap-2">
                                                             <input
                                                                 type="text"
-                                                                value={editNameValue}
-                                                                onChange={(e) => setEditNameValue(e.target.value)}
-                                                                onKeyDown={(e) => {
-                                                                    if (e.key === 'Enter') {
+                                                                value={
+                                                                    editNameValue
+                                                                }
+                                                                onChange={(e) =>
+                                                                    setEditNameValue(
+                                                                        e.target
+                                                                            .value,
+                                                                    )
+                                                                }
+                                                                onKeyDown={(
+                                                                    e,
+                                                                ) => {
+                                                                    if (
+                                                                        e.key ===
+                                                                        'Enter'
+                                                                    ) {
                                                                         handleNameSave();
                                                                     }
 
-                                                                    if (e.key === 'Escape') {
-                                                                        setIsEditingName(false);
+                                                                    if (
+                                                                        e.key ===
+                                                                        'Escape'
+                                                                    ) {
+                                                                        setIsEditingName(
+                                                                            false,
+                                                                        );
                                                                     }
                                                                 }}
-                                                                disabled={isSavingName}
-                                                                className="w-40 rounded border bg-gray-800 px-3 py-1.5 text-center font-bold text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                                                                disabled={
+                                                                    isSavingName
+                                                                }
+                                                                className="w-40 rounded border bg-gray-800 px-3 py-1.5 text-center font-bold text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
                                                                 autoFocus
                                                             />
                                                             <button
-                                                                onClick={handleNameSave}
-                                                                disabled={isSavingName}
+                                                                onClick={
+                                                                    handleNameSave
+                                                                }
+                                                                disabled={
+                                                                    isSavingName
+                                                                }
                                                                 className="rounded bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-500 disabled:opacity-50"
                                                             >
                                                                 Uložit
                                                             </button>
                                                             <button
-                                                                onClick={() => setIsEditingName(false)}
-                                                                disabled={isSavingName}
+                                                                onClick={() =>
+                                                                    setIsEditingName(
+                                                                        false,
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    isSavingName
+                                                                }
                                                                 className="rounded bg-gray-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-600 disabled:opacity-50"
                                                             >
                                                                 Zrušit
@@ -173,8 +210,13 @@ export function AppHeader() {
                                                         <div
                                                             className="group flex cursor-pointer items-center gap-2 rounded px-3 py-1 transition-colors hover:bg-gray-800"
                                                             onClick={() => {
-                                                                setEditNameValue(auth.user.name);
-                                                                setIsEditingName(true);
+                                                                setEditNameValue(
+                                                                    auth.user
+                                                                        .name,
+                                                                );
+                                                                setIsEditingName(
+                                                                    true,
+                                                                );
                                                             }}
                                                         >
                                                             <h3>
@@ -190,14 +232,14 @@ export function AppHeader() {
                                                                 strokeWidth="2"
                                                                 strokeLinecap="round"
                                                                 strokeLinejoin="round"
-                                                                className="text-gray-400 opacity-60 sm:opacity-0 transition-opacity sm:group-hover:opacity-100"
+                                                                className="text-gray-400 opacity-60 transition-opacity sm:opacity-0 sm:group-hover:opacity-100"
                                                             >
-                                                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                                                                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                                                             </svg>
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="w-full rounded-md border border-gray-700 bg-gray-800 p-4 text-center shadow-inner">
+                                                <div className="w-full rounded-md border border-brand-secondary bg-brand-primary p-4 text-center shadow-inner">
                                                     <p className="mb-1 text-sm text-gray-400">
                                                         Codice:
                                                     </p>
@@ -214,10 +256,11 @@ export function AppHeader() {
                                                         }
                                                         className="w-full rounded-md border border-red-900 bg-red-950 px-4 py-2 text-sm font-semibold text-red-500 transition-colors hover:border-red-600 hover:bg-red-600 hover:text-white"
                                                     >
-                                                        Smazat účet (Opustit hru)
+                                                        Smazat účet (Opustit
+                                                        hru)
                                                     </button>
                                                     <DialogClose asChild>
-                                                        <button className="w-full sm:hidden rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 text-sm font-semibold transition-colors border border-gray-700">
+                                                        <button className="w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2 text-sm font-semibold text-gray-300 transition-colors hover:bg-gray-700 hover:text-white sm:hidden">
                                                             Zavřít
                                                         </button>
                                                     </DialogClose>
@@ -232,15 +275,17 @@ export function AppHeader() {
                                             </div>
                                         </DialogContent>
                                     </Dialog>
-                                    <span className="text-gray-300">|</span>
-                                    <span>{auth.user?.player?.points} bodů</span>
+                                    <span className="text-brand-secondary">|</span>
+                                    <span className={"text-brand-secondary"}>
+                                        {auth.user?.player?.points} bodů
+                                    </span>
                                 </div>
 
                                 <Link
                                     href="/logout"
                                     method="post"
                                     as="button"
-                                    className="rounded-md bg-gray-900 px-3 py-1 sm:px-4 sm:py-1.5 text-white transition hover:bg-gray-800"
+                                    className="rounded-md bg-[#e4d5ac] px-3 py-1 text-brand-primary transition hover:bg-brand-secondary-sat sm:px-4 sm:py-1.5"
                                 >
                                     Odhlášení
                                 </Link>
@@ -249,13 +294,13 @@ export function AppHeader() {
                             <>
                                 <Link
                                     href={login()}
-                                    className="font-medium text-gray-700 hover:text-gray-900"
+                                    className="font-medium text-brand-secondary hover:text-brand-secondary-sat"
                                 >
                                     Přihlášení
                                 </Link>
                                 <Link
                                     href={register()}
-                                    className="rounded-md bg-gray-900 px-3 py-1 sm:px-4 sm:py-1.5 text-white transition hover:bg-gray-800"
+                                    className="rounded-md bg-brand-secondary px-3 py-1 text-brand-primary transition hover:bg-brand-secondary-sat sm:px-4 sm:py-1.5"
                                 >
                                     Registrace
                                 </Link>

@@ -19,8 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->integer('points');
             $table->string('codice')->unique();
-            $table->longText('image_data')->nullable();
-            $table->string('image_mime')->nullable();
+            $table->longText('image_path')->nullable();
             $table->timestamp('deadUntil')
                 ->nullable();
             $table->timestamps();

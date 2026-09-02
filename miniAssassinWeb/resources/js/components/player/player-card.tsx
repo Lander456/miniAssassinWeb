@@ -1,13 +1,13 @@
 import { router, useForm, usePage } from '@inertiajs/react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useRef } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 export interface Player {
     id: number;
     name: string;
     points: number;
     isDead: boolean;
-    image_data_uri: string | null
+    image_path: string | null
 }
 
 interface PlayerCardProps {
@@ -75,19 +75,19 @@ export default function PlayerCard({ player }: PlayerCardProps) {
 
     return (
         <div
-            className={`flex w-full max-w-sm items-center justify-between rounded-full border-gray-200 px-4 py-2 shadow-sm transition-colors ${player.isDead ? 'bg-gray-300 opacity-75' : 'bg-white'} `}
+            className={`flex w-full max-w-sm items-center justify-between rounded-full border-brand-secondary border-1 px-4 py-2 shadow-sm transition-colors ${player.isDead ? 'opacity-75' : 'bg-brand-primary'} `}
         >
             <Dialog>
                 <DialogTrigger asChild>
                     <button
-                        className={`flex items-center gap-2 font-medium tracking-wide ${player.isDead ? 'text-gray-500 line-through' : 'text-gray-800'} `}
+                        className={`flex items-center gap-2 font-medium tracking-wide ${player.isDead ? 'line-through' : 'text-brand-secondary'} `}
                     >
                         {player.name}
                     </button>
                 </DialogTrigger>
-                <DialogContent className="max-w-md border-gray-700 bg-gray-900">
+                <DialogContent className="max-w-md border-brand-secondary bg-brand-primary">
                     <DialogHeader>
-                        <DialogTitle className="text-xl text-white">
+                        <DialogTitle className="text-xl text-brand-secondary">
                             {player.name}
                         </DialogTitle>
                     </DialogHeader>
@@ -96,9 +96,9 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                             className={`relative flex justify-center overflow-hidden rounded-md ${isAdmin ? 'group cursor-pointer' : ''}`}
                             onClick={handleImageClick}
                         >
-                            {player.image_data_uri ? (
+                            {player.image_path ? (
                                 <img
-                                    src={player.image_data_uri}
+                                    src={`/storage/${player.image_path}`}
                                     alt={`Fotka hráče ${player.name}`}
                                     className={`max-h-[50vh] w-auto rounded-md object-contain shadow-lg transition duration-200 ${isAdmin ? 'group-hover:opacity-30 group-hover:blur-sm' : ''}`}
                                 />
@@ -110,7 +110,6 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                                 </div>
                             )}
 
-                            {/* Zobrazí se jen adminovi při najetí myší */}
                             {isAdmin && (
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                                     <span className="rounded bg-black/80 px-3 py-1.5 text-sm font-semibold text-white shadow-md">
@@ -119,7 +118,6 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                                 </div>
                             )}
 
-                            {/* Skrytý input */}
                             {isAdmin && (
                                 <input
                                     type="file"
@@ -134,12 +132,12 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                 </DialogContent>
             </Dialog>
             <span
-                className={`tracking-wide ${player.isDead ? 'text-gray-500' : 'text-gray-800'} `}
+                className={`tracking-wide ${player.isDead ? 'text-gray-500' : 'text-brand-secondary'} `}
             >
                 {player.points}
             </span>
             {isAdmin && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 text-brand-secondary">
                     <form
                         onSubmit={submitPoints}
                         className="flex items-center gap-2"
@@ -149,7 +147,7 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                             value={data.points}
                             onChange={(e) => setData('points', e.target.value)}
                             placeholder="+/-"
-                            className="w-16 rounded-md border border-gray-300 px-2 py-1 text-sm text-black"
+                            className="w-16 rounded-md border border-brand-secondary px-2 py-1 text-sm text-brand-secondary"
                             required
                         />
                         <button
@@ -162,7 +160,7 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                     </form>
                     <button
                         onClick={handleDelete}
-                        className="rounded-md p-1.5 text-gray-400 transition-colors hover:bg-red-600 hover:text-white"
+                        className="rounded-md p-1.5 text-red-600 transition-colors hover:bg-red-600 hover:text-white"
                         title="smazat hrace"
                         type="button"
                     >

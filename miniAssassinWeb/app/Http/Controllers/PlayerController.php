@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class PlayerController extends Controller
 {
@@ -62,6 +66,10 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         $user = $player->user;
+
+        if ($user) {
+            Storage::disk('public')->deleteDirectory('players/' . $user->name);
+        }
 
         $player->delete();
 
@@ -132,16 +140,24 @@ class PlayerController extends Controller
     public function updateImage(Request $request)
     {
         $request->validate([
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,heic', 'max:5096'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,heic', 'max:5120'],
         ]);
 
         $file = $request->file('image');
-        $imageData = base64_encode(file_get_contents($file->getRealPath()));
-        $imageMime = $file->getClientMimeType();
+
+        $filename = Str::slug($request->user()->name) . '.webp';
+        $path = 'players/' . $request->user()->name . '/image/' . $filename;
+
+        $manager = ImageManager::usingDriver(Driver::class);
+
+        $image = $manager->decode($file->getRealPath());
+
+        $encoded = $image->encodeUsingFileExtension('webp', 80);
+
+        Storage::disk('public')->put($path, (string) $encoded);
 
         $request->user()->player->update([
-            'image_data' => $imageData,
-            'image_mime' => $imageMime,
+            'image_path' => $path
         ]);
 
         return back()->with('success', 'Image updated.');
@@ -149,16 +165,24 @@ class PlayerController extends Controller
 
     public function forcedUpdateImage(Request $request, Player $player) {
         $request->validate([
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,heic', 'max:5096'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,heic', 'max:5120'],
         ]);
 
         $file = $request->file('image');
-        $imageData = base64_encode(file_get_contents($file->getRealPath()));
-        $imageMime = $file->getClientMimeType();
+
+        $filename = Str::slug($request->user()->name) . '.webp';
+        $path = 'players/' . $player->user->id . '/image/' . $filename;
+
+        $manager = ImageManager::usingDriver(Driver::class);
+
+        $image = $manager->decode($file->getRealPath());
+
+        $encoded = $image->encodeUsingFileExtension('webp', 80);
+
+        Storage::disk('public')->put($path, (string) $encoded);
 
         $player->update([
-            'image_data' => $imageData,
-            'image_mime' => $imageMime,
+            'image_path' => $path
         ]);
 
         return back()->with('success', 'Image updated.');

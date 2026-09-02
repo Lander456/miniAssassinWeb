@@ -18,7 +18,7 @@ class LeaderboardController extends Controller
                 'name' => $player->user->name,
                 'points' => $player->points,
                 'isDead' => $player->deadUntil > now(),
-                'image_data_uri' => $player->image_data_uri,
+                'image_path' => $player->image_path,
             ];
         });
 

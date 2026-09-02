@@ -13,6 +13,10 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
+    --color-brand-primary: #27241e;
+    --color-brand-secondary: #e4d5ac;
+    --color-brand-secondary-sat: #e4ce91;
+
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);

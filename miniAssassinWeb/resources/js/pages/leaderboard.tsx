@@ -23,9 +23,9 @@ export default function Leaderboard({ players }: LeaderboardProps) {
         <>
             <Head title={'Leaderboard'} />
             <AppHeader />
-            <div className="flex min-h-screen flex-col items-center bg-[#5A5A5A] p-6 text-[#FFFFFF] lg:justify-center">
-                <div className="mb-4 rounded-xl bg-white px-10 py-2 shadow-sm">
-                    <h2 className="text-lg font-medium tracking-wide text-gray-800">
+            <div className="flex min-h-screen flex-col items-center bg-brand-primary p-6 text-brand-secondary lg:justify-center">
+                <div className="mb-4 rounded-xl bg-brand-primary text-brand-secondary border-brand-secondary border-2 px-10 py-2 shadow-sm">
+                    <h2 className="text-lg font-medium tracking-wide">
                         Leaderboard
                     </h2>
                 </div>

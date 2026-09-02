@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 
 export default function Rules() {
     return (
-        <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-brand-primary px-4 py-12 sm:px-6 lg:px-8">
             <Head title="Pravidla" />
 
             <div className="mx-auto max-w-3xl">
@@ -13,22 +13,22 @@ export default function Rules() {
                     >
                         &larr; Zpět na hlavní stránku
                     </Link>
-                    <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900">
+                    <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-brand-secondary">
                         Pravidla hry
                     </h1>
-                    <p className="text-lg text-gray-500">
+                    <p className="text-lg text-brand-secondary">
                         V miniAssassinu (stejně jako v tom velkém, dospěláckém)
                         je veškeré násilí zapovězeno. Stejně tak se prosím řiďme
                         základním pravidlem a to nebuď kretén.
                     </p>
-                    <div className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xl">
+                    <div className="overflow-hidden rounded-2xl border border-brand-secondary bg-brand-primary shadow-xl text-brand-secondary">
                         <div className="space-y-10 p-8 sm:p-10">
                             <section className="flex flex-col gap-4 text-left sm:gap-6">
                                 <div>
-                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                    <h2 className="mb-2 text-xl font-bold">
                                         1. Základní princip
                                     </h2>
-                                    <p className="leading-relaxed text-gray-600">
+                                    <p className="leading-relaxed">
                                         <p>
                                             V miniAssassinu každý hráč
                                             reprezentuje jednoho aktéra v
@@ -84,10 +84,10 @@ export default function Rules() {
                                     </p>
                                 </div>
                                 <div>
-                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                    <h2 className="mb-2 text-xl font-bold">
                                         2. Vražda
                                     </h2>
-                                    <p className="mb-3 leading-relaxed text-gray-600">
+                                    <p className="mb-3 leading-relaxed">
                                         <span className="text-xl font-bold text-red-700">
                                             VRAŽDA V MINIASSASSINU (stejně jako
                                             v tom velkém, dospěláckém) PROBÍHÁ
@@ -100,7 +100,7 @@ export default function Rules() {
                                             kartáčky a takové, kterými je možno
                                             oběť zranit.
                                         </p>
-                                        <ul className="list-disc space-y-2 pl-5 text-left text-gray-700">
+                                        <ul className="list-disc space-y-2 pl-5 text-left">
                                             <li>
                                                 Platná je pouze taková vražda,
                                                 při níž se vrah k oběti v dané
@@ -177,10 +177,10 @@ export default function Rules() {
                                     </p>
                                 </div>
                                 <div>
-                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                    <h2 className="mb-2 text-xl font-bold">
                                         3. Smrt
                                     </h2>
-                                    <p className="mb-3 leading-relaxed text-gray-600">
+                                    <p className="mb-3 leading-relaxed">
                                         <p>Smrtí pro hráče hra nekončí.</p>
                                         <p>
                                             Pokud je hráč zabit, na 10 minut je
@@ -197,10 +197,10 @@ export default function Rules() {
                                     </p>
                                 </div>
                                 <div>
-                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                    <h2 className="mb-2 text-xl font-bold">
                                         4. Spory
                                     </h2>
-                                    <p className="mb-3 leading-relaxed text-gray-600">
+                                    <p className="mb-3 leading-relaxed">
                                         <p>
                                             Jakoukoliv spornou situaci se Hráči
                                             pokusí nejprve vyřešit na místě.
@@ -230,10 +230,10 @@ export default function Rules() {
                                     </p>
                                 </div>
                                 <div>
-                                    <h2 className="mb-2 text-xl font-bold text-gray-900">
+                                    <h2 className="mb-2 text-xl font-bold">
                                         5. Metaotázky a jejich odpovědi
                                     </h2>
-                                    <p className="mb-3 leading-relaxed text-gray-600">
+                                    <p className="mb-3 leading-relaxed">
                                         <p>
                                             Pokud je hráč dotázán, zda se účastní
                                             miniassassina, jeho odpověď musí být

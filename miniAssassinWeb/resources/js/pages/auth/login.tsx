@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import logoImage from '../../../images/logo2.png'
 
 export default function Login({ status }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -21,13 +22,18 @@ export default function Login({ status }) {
     };
 
     return (
-        <>
-            <Head title="Log in" />
+        <div className="text-brand-secondary bg-brand-primary">
+            <Head title="Přihlášení" />
+
+            <img
+                src={logoImage}
+                alt="Logo společnosti"
+            />
 
             <form onSubmit={submit} className="flex flex-col gap-6">
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+                        <Label htmlFor="email">Emailová adresa</Label>
                         <Input
                             id="email"
                             type="email"
@@ -42,7 +48,7 @@ export default function Login({ status }) {
 
                     <div className="grid gap-2">
                         <div className="flex items-center">
-                            <Label htmlFor="password">Password</Label>
+                            <Label htmlFor="password">Heslo</Label>
                         </div>
                         <PasswordInput
                             id="password"
@@ -56,18 +62,18 @@ export default function Login({ status }) {
 
                     <Button
                         type="submit"
-                        className="mt-4 w-full"
+                        className="mt-4 w-full bg-brand-primary text-brand-secondary hover:opacity-80 hover:bg-brand-primary border-brand-secondary border"
                         disabled={processing}
                     >
                         {processing && <Spinner />}
-                        Log in
+                        Přihlásit
                     </Button>
                 </div>
 
-                <div className="mt-4 text-center text-sm text-muted-foreground">
-                    Don't have an account?{' '}
-                    <Link href="/register" className="underline hover:text-gray-900">
-                        Sign up
+                <div className="mt-4 text-center text-sm text-brand-secondary">
+                    Ještě jsi se neupsal do služeb Aeronauticy Fenomenale?{' '}
+                    <Link href="/register" className="underline hover:text-brand-secondary-sat">
+                        Zápis
                     </Link>
                 </div>
             </form>
@@ -77,6 +83,6 @@ export default function Login({ status }) {
                     {status}
                 </div>
             )}
-        </>
+        </div>
     );
 }

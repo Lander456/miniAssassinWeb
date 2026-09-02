@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import logoImage from '../../../images/logo2.png'
 
 type Props = {
     passwordRules?: string;
@@ -29,14 +30,19 @@ export default function Register({ passwordRules }: Props) {
     };
 
     return (
-        <>
+        <div className="text-brand-secondary">
             <Head>
-                <title>Create an account</title>
+                <title>Zápis do služeb</title>
                 <meta
                     name="description"
                     content="Enter your details below to create your account"
                 />
             </Head>
+
+            <img
+                src={logoImage}
+                alt="Logo společnosti"
+            />
 
             <form onSubmit={submit} className="flex flex-col gap-6">
                 <div className="grid gap-6">
@@ -50,7 +56,7 @@ export default function Register({ passwordRules }: Props) {
                             tabIndex={1}
                             autoComplete="name"
                             name="name"
-                            placeholder="Full name"
+                            placeholder="Vaše celé jméno"
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
                         />
@@ -81,7 +87,7 @@ export default function Register({ passwordRules }: Props) {
                             tabIndex={3}
                             autoComplete="new-password"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Heslo"
                             passwordrules={passwordRules}
                             value={data.password}
                             onChange={(e) =>
@@ -101,7 +107,7 @@ export default function Register({ passwordRules }: Props) {
                             tabIndex={4}
                             autoComplete="new-password"
                             name="password_confirmation"
-                            placeholder="Confirm password"
+                            placeholder="Potvrzení hesla"
                             passwordrules={passwordRules}
                             value={data.password_confirmation}
                             onChange={(e) =>
@@ -126,23 +132,23 @@ export default function Register({ passwordRules }: Props) {
 
                     <Button
                         type="submit"
-                        className="mt-2 w-full"
+                        className="mt-2 w-full text-brand-secondary bg-brand-primary border border-brand-secondary hover:bg-brand-primary"
                         tabIndex={5}
                         disabled={processing}
                         data-test="register-user-button"
                     >
                         {processing && <Spinner />}
-                        Create account
+                        Zapsat se do řad společnosti
                     </Button>
                 </div>
 
-                <div className="text-center text-sm text-muted-foreground">
-                    Už máte účet?{' '}
-                    <TextLink href="/login" tabIndex={6}>
-                        Log in
+                <div className="text-center text-sm text-brand-secondary">
+                    Už jste ve složbách společnosti?{' '}
+                    <TextLink href="/login" tabIndex={6} className="text-brand-secondary hover:text-brand-secondary-sat">
+                        Přihlášení
                     </TextLink>
                 </div>
             </form>
-        </>
+        </div>
     );
 }

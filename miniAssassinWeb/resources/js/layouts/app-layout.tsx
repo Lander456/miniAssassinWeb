@@ -11,10 +11,14 @@ export default function AppLayout({
 }) {
     return (
         <>
-            <AppLayoutTemplate breadcrumbs={breadcrumbs}>
-                {children}
-            </AppLayoutTemplate>
-            <BottomBar />
+            <div className="pb-16">
+                <AppLayoutTemplate breadcrumbs={breadcrumbs}>
+                    {children}
+                </AppLayoutTemplate>
+            </div>
+            <div className="fixed bottom-0 left-0 z-50 w-full">
+                <BottomBar />
+            </div>
         </>
     );
 }

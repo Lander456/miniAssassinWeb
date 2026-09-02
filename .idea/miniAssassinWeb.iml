@@ -146,6 +146,8 @@
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/gif" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/image" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
