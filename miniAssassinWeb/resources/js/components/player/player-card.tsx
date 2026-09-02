@@ -98,7 +98,12 @@ export default function PlayerCard({ player }: PlayerCardProps) {
                         >
                             {player.image_path ? (
                                 <img
-                                    src={`/storage/${player.image_path}`}
+                                    src={
+                                        `${player.image_path.startsWith('http')
+                                            ? player.image_path
+                                            : `storage/${player.image_path}`
+                                        }`
+                                    }
                                     alt={`Fotka hráče ${player.name}`}
                                     className={`max-h-[50vh] w-auto rounded-md object-contain shadow-lg transition duration-200 ${isAdmin ? 'group-hover:opacity-30 group-hover:blur-sm' : ''}`}
                                 />
