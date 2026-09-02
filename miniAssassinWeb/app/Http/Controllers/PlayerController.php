@@ -173,7 +173,7 @@ class PlayerController extends Controller
         $file = $request->file('image');
 
         $filename = Str::slug($request->user()->name) . '.webp';
-        $path = 'players/' . $player->user->id . '/image/' . $filename;
+        $path = 'players/' . $player->user->name . '/image/' . $filename;
 
         $manager = ImageManager::usingDriver(Driver::class);
 
