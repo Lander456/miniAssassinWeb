@@ -147,7 +147,6 @@
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/gif" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/image" />
-      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aclyte/flysystem-aws-s3-v3" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aws/aws-crt-php" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aws/aws-sdk-php" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/league/flysystem-aws-s3-v3" />
