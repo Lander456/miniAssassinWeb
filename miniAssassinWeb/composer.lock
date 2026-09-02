@@ -4,75 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fdb662372686e977dde48d9bbeb5036",
+    "content-hash": "dad169ba3b7bc5440b086d8515cdb45c",
     "packages": [
-        {
-            "name": "aclyte/flysystem-aws-s3-v3",
-            "version": "1.1.31",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aclyte/flysystem-aws-s3-v3.git",
-                "reference": "0fee42a0027b421bb4436c57abeaec9ab0ffdaa7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aclyte/flysystem-aws-s3-v3/zipball/0fee42a0027b421bb4436c57abeaec9ab0ffdaa7",
-                "reference": "0fee42a0027b421bb4436c57abeaec9ab0ffdaa7",
-                "shasum": ""
-            },
-            "require": {
-                "aws/aws-sdk-php": "^3.132.4",
-                "league/flysystem": "^2.0 || ^3.0",
-                "league/mime-type-detection": "^1.0.0",
-                "php": "^7.4 || ^8.0"
-            },
-            "conflict": {
-                "guzzlehttp/ringphp": "<1.1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "compatibility.php"
-                ],
-                "psr-4": {
-                    "League\\Flysystem\\AwsS3V3\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frank de Jonge",
-                    "email": "info@frankdejonge.nl",
-                    "role": "Original author"
-                },
-                {
-                    "name": "Dmitry Smirnov",
-                    "email": "caxopok@gmail.com",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "AWS S3 filesystem adapter for Flysystem with PHP 7.4–8.4 support (Flysystem 2.x and 3.x).",
-            "homepage": "https://github.com/aclyte/flysystem-aws-s3-v3",
-            "keywords": [
-                "Flysystem",
-                "aws",
-                "file",
-                "files",
-                "filesystem",
-                "php74",
-                "php84",
-                "s3",
-                "storage"
-            ],
-            "support": {
-                "issues": "https://github.com/aclyte/flysystem-aws-s3-v3/issues",
-                "source": "https://github.com/aclyte/flysystem-aws-s3-v3"
-            },
-            "time": "2026-07-10T08:55:25+00:00"
-        },
         {
             "name": "aws/aws-crt-php",
             "version": "v1.2.7",
