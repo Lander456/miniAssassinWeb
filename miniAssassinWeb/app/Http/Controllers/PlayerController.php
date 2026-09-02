@@ -156,8 +156,10 @@ class PlayerController extends Controller
 
         Storage::disk('public')->put($path, (string) $encoded);
 
+        $publicUrl = Storage::url($path);
+
         $request->user()->player->update([
-            'image_path' => $path
+            'image_path' => $publicUrl
         ]);
 
         return back()->with('success', 'Image updated.');
@@ -181,8 +183,10 @@ class PlayerController extends Controller
 
         Storage::disk('public')->put($path, (string) $encoded);
 
+        $publicUrl = Storage::url($path);
+
         $player->update([
-            'image_path' => $path
+            'image_path' => $publicUrl
         ]);
 
         return back()->with('success', 'Image updated.');

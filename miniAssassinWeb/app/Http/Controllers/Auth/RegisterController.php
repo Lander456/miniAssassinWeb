@@ -52,10 +52,12 @@ class RegisterController extends Controller
             $encoded = $image->encodeUsingFileExtension('webp', 80);
 
             Storage::disk('public')->put($path, (string) $encoded);
+
+            $publicUrl = Storage::url($path);
         }
 
         $user->player->update([
-            'image_path' => $path ?? null,
+            'image_path' => $publicUrl ?? null,
         ]);
 
         Auth::login($user);
