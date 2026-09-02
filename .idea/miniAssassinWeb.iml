@@ -83,7 +83,6 @@
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/psr/log" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/psr/simple-cache" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/psy/psysh" />
-      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/ramsey/collection" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/sebastian/cli-parser" />
@@ -148,11 +147,14 @@
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/gif" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aclyte/flysystem-aws-s3-v3" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aws/aws-crt-php" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/aws/aws-sdk-php" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/league/flysystem-aws-s3-v3" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/mtdowling/jmespath.php" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/polyfill-php82" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/polyfill-php83" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

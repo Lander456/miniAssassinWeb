@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.3",
         "ext-gd": "*",
+        "aclyte/flysystem-aws-s3-v3": "^1.1",
         "inertiajs/inertia-laravel": "^3.0",
         "intervention/image": "^4.3",
         "laravel/chisel": "^0.1.0",
@@ -112,6 +113,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.3.6"
         }
     },
     "minimum-stability": "stable",
