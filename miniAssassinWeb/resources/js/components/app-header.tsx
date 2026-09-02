@@ -123,7 +123,12 @@ export function AppHeader() {
                                                     {auth.user?.player
                                                         ?.image_path ? (
                                                         <img
-                                                            src={`/storage/${auth.user.player.image_path}`}
+                                                            src={
+                                                                `${auth.user.player.image_path.startsWith('http')
+                                                                    ? auth.user.player.image_path
+                                                                    : `storage/${auth.user.player.image_path}`
+                                                                }`
+                                                            }
                                                             alt={
                                                                 'uhhhhh.................'
                                                             }
