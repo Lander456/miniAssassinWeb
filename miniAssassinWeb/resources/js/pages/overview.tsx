@@ -17,12 +17,13 @@ export default function Standby() {
                     Registrace je spuštěna
                 </h1>
                 <p className="mb-8 max-w-2xl text-center text-lg">
-                    Brněnské podsvětí nikdy nespí, to ví i jeho nejmenší aktéři.
-                    Proto nová společnost Aeronautica Fenomenale také nespí a
-                    pod vedením exDonů Venerdi a Brutale zamířila vstříc
-                    spojenectví s bájnou Geologicou Sicilianou. První prácička
-                    zní jednoduše, získat informace o schodech, taková běžná
-                    rutina. Člověk by si skoro ani nebral kartáček...
+                    Aeronautica Fenomenale se po zajištění zakázky pro pana Morettiho Geologice Sicilianě prokázala jako
+                    užitečný partner. Proto se rozhodla na Aeronauticu opět obrátit s novou zakázkou. Nikdo v podsvětí
+                    neminul náhlý zájem Geologicy Siciliany o veřejnou infrastrukturu v Brně a jistá Scoiattola Nera se
+                    rozhodla její chvilkové nepozornosti využít a do města začala pašovat smrtící kartáčky atypických
+                    velikostí. Aeronautica Fenomenale dostala jednoduchý úkol. Celou zásilku zničit. Dle dostupných
+                    informací k tomu nastane příležitost 20.9. mezi 17:00 a 22:00. Nějaká ostraha je očekávána. Ten
+                    kartáček by se mohl hodit...
                 </p>
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <Link

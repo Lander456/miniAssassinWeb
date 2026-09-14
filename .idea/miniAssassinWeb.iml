@@ -154,6 +154,7 @@
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/filesystem" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/polyfill-php82" />
       <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/vendor/symfony/polyfill-php83" />
+      <excludeFolder url="file://$MODULE_DIR$/miniAssassinWeb/storage/inertia-devtools" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
