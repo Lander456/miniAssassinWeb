@@ -58,8 +58,8 @@ export default function Rules() {
                                             jako nevyhovující, vyhrazují si
                                             právo na místě pořídit a do systému
                                             nahrát novou. Hráčské fotografie
-                                            budou po skončení hry (tedy po 20:00
-                                            7.8. 2026) neprodleně ze systému
+                                            budou po skončení hry (tedy po 22:00
+                                            20.9. 2026) neprodleně ze systému
                                             smazány.
                                         </p>
                                         <p>
@@ -70,8 +70,8 @@ export default function Rules() {
                                             dráhou.
                                         </p>
                                         <p>
-                                            Hra bude probíhat v pátek 7.8. 2026
-                                            mezi 17:00 - 20:00, hráči budou včas
+                                            Hra bude probíhat v neděli 20.9. 2026
+                                            mezi 17:00 - 22:00, hráči budou včas
                                             skrze discord v zápatí webu hry a
                                             skrze web samotný, informováni
                                             ohledně místa a času srazu před
