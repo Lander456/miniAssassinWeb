@@ -15,7 +15,7 @@ interface CodeItem {
     id: number;
     name: string;
     description?: string | null;
-    image_data_uri: string | null;
+    image_path: string | null;
     active: boolean;
 }
 
@@ -204,9 +204,14 @@ export function AppSidebar() {
                                                     </div>
                                                 )}
 
-                                                {item.image_data_uri ? (
+                                                {item.image_path ? (
                                                     <img
-                                                        src={item.image_data_uri}
+                                                        src={
+                                                            `${item.image_path.startsWith('http')
+                                                            ? item.image_path
+                                                            : `${item.image_path}`
+                                                            }`
+                                                        }
                                                         alt={`Cifra pro ${item.name}`}
                                                         className="max-h-[60vh] w-auto rounded-md object-contain"
                                                     />

@@ -18,8 +18,7 @@ return new class extends Migration
             $table->integer('points');
             $table->integer('incrementValue');
             $table->boolean('active')->default(true);
-            $table->mediumText('image_data')->nullable();
-            $table->string('image_mime')->nullable();
+            $table->mediumText('image_path')->nullable();
             $table->timestamps();
         });
     }

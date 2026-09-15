@@ -16,8 +16,7 @@ class Code extends Model
         'description',
         'codice',
         'active',
-        'image_data',
-        'image_mime',
+        'image_path',
     ];
 
     protected $appends = [

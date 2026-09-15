@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Code;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class CodeController extends Controller
 {
@@ -97,25 +101,36 @@ class CodeController extends Controller
             abort(403);
         }
 
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255|unique:codes,name',
             'description' => 'string|max:255|nullable',
             'points' => 'required|numeric|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
         ]);
 
-        $file = $validated['image'];
-        $base64Image = base64_encode($file->get());
+        $file = $request['image'];
 
-        $codice = substr(hash('sha256', $base64Image), 0, 8);
+        $filename = $request['name'] . '.webp';
+        $path = 'ciphers/' . $filename;
+
+        $manager = ImageManager::usingDriver(Driver::class);
+
+        $image = $manager->decode($file->getRealPath());
+
+        $encoded = $image->encodeUsingFileExtension('webp', 80);
+
+        Storage::disk('public')->put($path, (string) $encoded);
+
+        $publicUrl = Storage::url($path);
+
+        $codice = Str::random(8);
 
         Code::create([
-            'name' => $validated['name'],
-            'points' => $validated['points'],
-            'description' => $validated['description'],
+            'name' => $request['name'],
+            'points' => $request['points'],
+            'description' => $request['description'],
             'codice' => $codice,
-            'image_data' => $base64Image,
-            'image_mime' => $file->getClientMimeType(),
+            'image_path' => $publicUrl,
             'active' => true,
         ]);
 
